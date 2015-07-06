@@ -22,10 +22,13 @@ public class HibernateUtils {
 			Configuration configuration = new Configuration();
 			configuration.configure();
 
+			//This line adds entity to Hibernate
+			configuration.addAnnotatedClass(Employee.class);
+
 			serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
 					configuration.getProperties()).build();
 
-			factory = configuration.addAnnotatedClass(Employee.class).buildSessionFactory(serviceRegistry);
+			factory = configuration.buildSessionFactory(serviceRegistry);
 
 			new H2WebServerDeamonStart();
 
